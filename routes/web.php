@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,6 @@ Route::get('/', function () {
 
 Route::get('/profile/{nama}/{npm}/{kelas}', [App\Http\Controllers\ProfileController::class, 'profile']);
 
-Route::resource('user', userController::class);
-Route::get('/user/create', [userController::class, 'create']);
-Route::post('/user/store', [userController::class, 'store']);
+Route::get('user', [UserController::class, 'index']);
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
