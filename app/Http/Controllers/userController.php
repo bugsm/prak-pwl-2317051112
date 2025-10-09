@@ -1,28 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use App\Models\UserModel;
 use App\Models\Kelas;
-
-class userController extends Controller
+use Illuminate\Http\Request;
+class UserController extends Controller
 {
-    public function create(){
-    $kelasModel = new Kelas();
-    $kelas = $kelasModel->getKelas();
-    $data = [
-        'title' => 'Create User',
-        'kelas' => $kelas
-    ];
+    public $userModel;
+    public $kelasModel;
 
-    return view('create_user', $data);
-}
-
-public function index()
+    public function __construct()
     {
-        return view('users.index', [
-            'title' => 'Daftar User'
-        ]);
+        $this->userModel = new UserModel();
+        $this->kelasModel = new Kelas();
     }
 
+    public function store(Request $request)
+{
+    $this->userModel->create([
+        'nama' => $request->input('nama'),
+        'nim' => $request->input('npm'),
+        'kelas_id' => $request->input('kelas_id'),
+    ]);
+
+    return redirect()->to('/user');
+}
+
+
+    public function create(){
+        $kelas = $this->kelasModel->getKelas();
+
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $kelas
+        ];
+
+        return view('create_user', $data);
+    }
+
+    public function index()
+{
+    $data = [
+        'title' => 'List User',
+        'users' => $this->userModel->getUser(),
+    ];
+    return view('list_user', $data);
+}
 }
