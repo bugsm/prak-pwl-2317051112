@@ -23,7 +23,7 @@ class UserController extends Controller
         'kelas_id' => $request->input('kelas_id'),
     ]);
 
-    return redirect()->to('/user');
+    return redirect()->route('user.index')->with('success', 'Data berhasil ditambahkan!');
 }
 
 
@@ -46,4 +46,59 @@ class UserController extends Controller
     ];
     return view('list_user', $data);
 }
+
+public function edit($id)
+{
+    $user = $this->userModel->find($id);
+    $kelas = $this->kelasModel->getKelas();
+
+    if (!$user) {
+        return redirect()->to('/user')->with('error', 'User tidak ditemukan');
+    }
+
+    $data = [
+        'title' => 'Edit User',
+        'user' => $user,
+        'kelas' => $kelas
+    ];
+
+    return view('edit_user', $data);
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'npm' => 'required|string|max:20',
+        'kelas_id' => 'required|exists:kelas,id',
+    ]);
+
+    $user = $this->userModel->find($id);
+
+    if (!$user) {
+        return redirect()->to('/user')->with('error', 'User tidak ditemukan');
+    }
+
+    $user->update([
+        'nama' => $request->input('nama'),
+        'nim' => $request->input('npm'),
+        'kelas_id' => $request->input('kelas_id'),
+    ]);
+
+    return redirect()->to('/user')->with('success', 'Data user berhasil diperbarui!');
+}
+
+public function destroy($id)
+{
+    $user = $this->userModel->find($id);
+
+    if (!$user) {
+        return redirect()->to('/user')->with('error', 'User tidak ditemukan');
+    }
+
+    $user->delete();
+
+    return redirect()->to('/user')->with('success', 'Data user berhasil dihapus!');
+}
+
 }

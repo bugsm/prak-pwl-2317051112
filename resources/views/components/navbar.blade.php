@@ -18,8 +18,11 @@
                     <a href="{{ route('user.create') }}" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-200 shadow-md hover:shadow-lg">
                         Buat Anggota Baru
                     </a>
+                    <a href="{{ route('matakuliah.create') }}" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-600 hover:to-blue-600 transition-all duration-200 shadow-md hover:shadow-lg">
+                        Buat MataKuliah Baru
+                    </a>
                 </div>
-                
+
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
                     <button class="hamburger p-2" onclick="toggleMobileMenu()">
