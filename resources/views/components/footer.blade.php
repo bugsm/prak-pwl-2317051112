@@ -1,9 +1,18 @@
-<footer class="bg-light text-center py-3 mt-auto fixed-bottom">
+<footer class="bg-light text-center py-3 mt-auto ">
 <div class="text-center">
     <a href="/user" class="flex items-center justify-center mb-3 text-2xl font-semibold text-gray-900">
         <img src="{{ asset('images/logo.svg') }}" class="h-12 mr-3 sm:h-9" alt="DeaaL Logo">
 		DeaaL
     </a>
+    <ul class="flex justify-center mt-3 space-x-2 mb-1.5">
+        <li>
+            <a href="{{ route('user.index') }}" class="block text-sm text-center text-gray-500">Tabel User</a>
+        </li>
+        
+        <li>
+            <a href="{{ route('matakuliah.index') }}" class="block text-sm text-center text-gray-500">Tabel MataKuliah</a>
+        </li>
+    </ul>
 
     <span class="block text-sm text-center text-gray-500">© 2025 DeaaL™. All Rights Reserved
 	</span>

@@ -23,11 +23,19 @@ Route::get('/', function () {
 
 Route::get('/profile/{nama}/{npm}/{kelas}', [App\Http\Controllers\ProfileController::class, 'profile']);
 
-Route::get('user', [UserController::class, 'index']);
+Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
 
-Route::get('/matakuliah', [MatakuliahController::class, 'index']);
+Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
 Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
 Route::post('/matakuliah', [MatakuliahController::class, 'store'])->name('matakuliah.store');
+
+Route::get('matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
+Route::put('matakuliah/{id}', [MatakuliahController::class, 'update'])->name('matakuliah.update');
+Route::delete('matakuliah/{id}', [MatakuliahController::class, 'destroy'])->name('matakuliah.destroy');
+
+Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
